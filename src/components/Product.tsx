@@ -51,7 +51,7 @@ const Product = ({ id, title, price, imgUrl }: ProductProps) => {
                 </Button>
               </div>
               <Button
-                className="btn-dark"
+                className="btn-secondary"
                 size="sm"
                 onClick={() => removeItem(id)}
               >

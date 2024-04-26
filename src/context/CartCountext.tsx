@@ -1,5 +1,6 @@
 // 1
 import { createContext, useContext, ReactNode, useState } from "react";
+import Sidebar from "../components/Sidebar";
 
 //5
 type CartProviderProps = {
@@ -8,6 +9,8 @@ type CartProviderProps = {
 
 //7
 type CartContext = {
+  openCart: () => void;
+  closeCart: () => void;
   getItemQty: (id: number) => number;
   addItem: (id: number) => void;
   decreaseItem: (id: number) => void;
@@ -32,12 +35,18 @@ export function useCartContext() {
 
 //4
 export function CartProvider({ children }: CartProviderProps) {
+  // for sidbar
+  const [isOpen, setIsOpen] = useState(false);
+
   //10 use state (dorst kardan ye faza baray maghadir delkhah)
   const [cartItems, setCartItems] = useState<CartItem[]>([]);
 
   const cartQty = cartItems.reduce((qty, item) => {
     return item.qty + qty;
   }, 0);
+
+  const openCart = () => setIsOpen(true);
+  const closeCart = () => setIsOpen(false);
 
   // 11 dorst kardan functions ke bala esme bordim
 
@@ -89,9 +98,12 @@ export function CartProvider({ children }: CartProviderProps) {
         decreaseItem,
         cartItems,
         cartQty,
+        openCart,
+        closeCart,
       }}
     >
       {children}
+      <Sidebar isOpen={isOpen} />
     </CartContext.Provider>
   );
 }

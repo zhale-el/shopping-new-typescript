@@ -6,7 +6,7 @@ import { NavLink } from "react-router-dom";
 import { MdOutlineShoppingCart } from "react-icons/md";
 
 const Navbar = () => {
-  const { cartQty } = useCartContext();
+  const { cartQty, openCart, closeCart } = useCartContext();
 
   return (
     <NavbarBs className="bg-dark text-light mb-3">
@@ -24,7 +24,7 @@ const Navbar = () => {
             About
           </NavLink>
         </Nav>
-        <Button variant="outline-light" className="btn-shop">
+        <Button onClick={openCart} variant="outline-light" className="btn-shop">
           <MdOutlineShoppingCart />
           <div className="rounded-circle d-flex justify-content-center align-items-center number">
             {cartQty}
