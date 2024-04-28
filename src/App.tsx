@@ -10,7 +10,8 @@ const App = () => {
   return (
     <>
       <CartProvider>
-        <Navbar />
+        <Navbar/>
+        
         <Container>
           <Routes>
             <Route path="/" element={<Home />} />
