@@ -1,7 +1,7 @@
 // 1
 import { createContext, useContext, ReactNode, useState } from "react";
 import Sidebar from "../components/Sidebar";
-
+import { useLocalStroage } from "../hooks/useLoacalStroge";
 //5
 type CartProviderProps = {
   children: ReactNode;
@@ -39,7 +39,10 @@ export function CartProvider({ children }: CartProviderProps) {
   const [isOpen, setIsOpen] = useState(false);
 
   //10 use state (dorst kardan ye faza baray maghadir delkhah)
-  const [cartItems, setCartItems] = useState<CartItem[]>([]);
+  const [cartItems, setCartItems] = useLocalStroage<CartItem[]>(
+    "shopping-cart",
+    []
+  );
 
   const cartQty = cartItems.reduce((qty, item) => {
     return item.qty + qty;
